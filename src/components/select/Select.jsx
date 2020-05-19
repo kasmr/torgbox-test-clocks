@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './select.module.css';
+import { connect } from 'react-redux';
+import { changeTimezone } from '../../redux/actions';
 
-const timeZones = ['Moscow', 'Krasnodar', 'Krasnoyarsk'];
+const Select = ({ cities, changeTimezone }) => {
+  const [selectedCity, setSelectedCity] = useState(0);
 
-const Select = () => {
-  const [state, setState] = useState('');
+  // useEffect(() => {
+  //   //eslint-disable-next-line
+  // }, [selectedCity]);
 
   const onChange = (e) => {
-    setState(e.target.value);
+    setSelectedCity(e.target.value);
+    changeTimezone(selectedCity);
   };
+  console.log(selectedCity);
 
   return (
     <div className={style.select}>
-      <select value={state} onChange={onChange}>
-        {timeZones.map((timeZone, index) => (
-          <option key={index} value={timeZone}>
-            {timeZone}
+      <select value={selectedCity} onChange={onChange}>
+        {cities.map((item) => (
+          <option key={item.id} value={item.timeDifference}>
+            {item.name}
           </option>
         ))}
       </select>
@@ -23,4 +29,10 @@ const Select = () => {
   );
 };
 
-export default Select;
+const mapStateToProps = (state) => {
+  return {
+    cities: state.cities,
+  };
+};
+
+export default connect(mapStateToProps, { changeTimezone })(Select);
