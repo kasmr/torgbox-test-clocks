@@ -1,37 +1,46 @@
-import { CHANGE_TIMEZONE } from './types';
+import {
+  CHANGE_TIMEZONE_FOR_CLOCK_1,
+  CHANGE_TIMEZONE_FOR_CLOCK_2,
+} from './types';
 
 const initialState = {
-  date: 0,
+  hours1: 0,
+  hours2: 0,
   cities: [
     {
       id: 1,
       name: 'Москва',
-      timeDifference: 0,
+      hourDifference: 0,
     },
     {
       id: 2,
       name: 'Владивосток',
-      timeDifference: 36000000,
+      hourDifference: 7,
     },
     {
       id: 3,
       name: 'Калининград',
-      timeDifference: -3600000,
+      hourDifference: -1,
     },
     {
       id: 4,
       name: 'Красноярск',
-      timeDifference: 25200000,
+      hourDifference: 4,
     },
   ],
 };
 
 export const Reducer = (state = initialState, action) => {
-  switch (action.payload) {
-    case CHANGE_TIMEZONE:
+  switch (action.type) {
+    case CHANGE_TIMEZONE_FOR_CLOCK_1:
       return {
         ...state,
-        date: action.payload,
+        hours1: action.payload,
+      };
+    case CHANGE_TIMEZONE_FOR_CLOCK_2:
+      return {
+        ...state,
+        hours2: action.payload,
       };
 
     default:

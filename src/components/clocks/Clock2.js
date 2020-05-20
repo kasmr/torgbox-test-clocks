@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Clock as ReactClock } from 'react-clock';
 import Select from '../select/Select';
-import styles from './clock.module.css';
+import styles from './clocks.module.css';
 
-const Clock = () => {
+const Clock2 = ({ hours2, cities }) => {
   const [value, setValue] = useState();
 
-  const data = new Date();
+  const time = new Date();
 
-  data.setMilliseconds(0);
+  time.setMilliseconds(hours2 * 60 * 60 * 1000);
 
   useEffect(() => {
-    const interval = setInterval(() => setValue(data), 1000);
+    const interval = setInterval(() => setValue(time), 1000);
+
     return () => {
       clearInterval(interval);
     };
-  }, [data]);
+  }, [time]);
 
   const options = {
     hour: 'numeric',
@@ -32,9 +33,9 @@ const Clock = () => {
         value={value}
       />
       <h5>{value ? value.toLocaleString('ru', options) : '00:00:00'}</h5>
-      <Select />
+      <Select clockNumber={2} cities={cities} />
     </div>
   );
 };
 
-export default Clock;
+export default Clock2;
