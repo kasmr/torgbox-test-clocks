@@ -4,7 +4,30 @@ import { connect } from 'react-redux';
 import { changeTimezone } from '../../redux/actions';
 import PropTypes from 'prop-types';
 
-const Select = ({ cities, changeTimezone, clockNumber }) => {
+const cities = [
+  {
+    id: 1,
+    name: 'Москва',
+    hourDifference: 0,
+  },
+  {
+    id: 2,
+    name: 'Владивосток',
+    hourDifference: 7,
+  },
+  {
+    id: 3,
+    name: 'Калининград',
+    hourDifference: -1,
+  },
+  {
+    id: 4,
+    name: 'Красноярск',
+    hourDifference: 4,
+  },
+];
+
+const Select = ({ changeTimezone, clockNumber }) => {
   const [selectedCity, setSelectedCity] = useState(0);
 
   useEffect(() => {
@@ -15,7 +38,6 @@ const Select = ({ cities, changeTimezone, clockNumber }) => {
 
   const onChange = (e) => {
     setSelectedCity(e.target.value);
-    console.log(typeof e.target.value);
   };
 
   return (
@@ -32,7 +54,6 @@ const Select = ({ cities, changeTimezone, clockNumber }) => {
 };
 
 Select.propTypes = {
-  cities: PropTypes.array.isRequired,
   clockNumber: PropTypes.number.isRequired,
   changeTimezone: PropTypes.func.isRequired,
 };

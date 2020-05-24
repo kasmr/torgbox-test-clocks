@@ -3,12 +3,12 @@ import { Clock as ReactClock } from 'react-clock';
 import Select from '../select/Select';
 import styles from './clocks.module.css';
 
-const Clock2 = ({ hours2, cities }) => {
+const Clock1 = ({ hours, clockNumber }) => {
   const [value, setValue] = useState();
 
   const time = new Date();
 
-  time.setMilliseconds(hours2 * 60 * 60 * 1000);
+  time.setMilliseconds(hours * 60 * 60 * 1000);
 
   useEffect(() => {
     const interval = setInterval(() => setValue(time), 1000);
@@ -33,9 +33,9 @@ const Clock2 = ({ hours2, cities }) => {
         value={value}
       />
       <h5>{value ? value.toLocaleString('ru', options) : '00:00:00'}</h5>
-      <Select clockNumber={2} cities={cities} />
+      <Select clockNumber={clockNumber} />
     </div>
   );
 };
 
-export default Clock2;
+export default Clock1;
